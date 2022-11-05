@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  app:
+    image: wpafbo79/invokeai:latest
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+    volumes:
+      - configs:/InvokeAI/configs/
+      - models:/InvokeAI/models/ldm/stable-diffusion-v1/
+      - outputs:/InvokeAI/outputs/
+      - training:/InvokeAI/training-data/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+volumes:
+  configs:
+    driver: local
+  models:
+    driver: local
+  outputs:
+    driver: local
+  training:
+    driver: local
