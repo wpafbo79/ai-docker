@@ -65,7 +65,13 @@ if [ $optPreload -eq 1 ]; then
   exit
 fi
 
-if [ $(ls models/ldm/stable-diffusion-v1/*.ckpt | wc -l) -eq 0 ]; then
+# Copy data from directories covered by volumes to populate volumes.
+for dir in $(ls -d archive/*); do
+  rsync -HaAxX --ignore-existing $dir/ $(basename $dir)/
+done
+
+if [ $(ls models/ldm/stable-diffusion-v1/*.ckpt | wc -l) -eq 0 -o \
+  $(ls configs/models.yaml | wc -l) -eq 0 ]; then
   cat <<EOF
 No model found!
 Please run an interactive command to download models.
@@ -84,5 +90,5 @@ EOF
   exit
 fi
 
-echo "Running InvokeAI...  (This can take few minutes.)"
+echo "Running InvokeAI...  (This can take a few minutes.)"
 python3 scripts/invoke.py --web --host=0.0.0.0

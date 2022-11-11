@@ -8,6 +8,7 @@ services:
     restart: unless-stopped
     volumes:
       - configs:/InvokeAI/configs/
+      - logs:/InvokeAI/logs/
       - models:/InvokeAI/models/ldm/stable-diffusion-v1/
       - outputs:/InvokeAI/outputs/
       - training:/InvokeAI/training-data/
@@ -19,6 +20,8 @@ services:
 
 volumes:
   configs:
+    driver: local
+  logs:
     driver: local
   models:
     driver: local
