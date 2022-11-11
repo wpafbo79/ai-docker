@@ -2,7 +2,7 @@
 
 VERSION=v$(date -u +%Y%m%d-%H%M%S)
 echo $VERSION
-VERSION=v0.1
+VERSION=v0.2
 
 docker build \
   -f Dockerfile \
@@ -10,5 +10,7 @@ docker build \
   -t wpafbo79/invokeai:latest \
   .
 
-time docker push wpafbo79/invokeai:$VERSION
-time docker push wpafbo79/invokeai:latest
+time ( \
+  docker push wpafbo79/invokeai:$VERSION && \
+  docker push wpafbo79/invokeai:latest \
+)
