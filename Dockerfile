@@ -40,11 +40,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV BASE_DIR="/"
 ENV INSTALL_DIR="${BASE_DIR}InvokeAI/"
 
-ENV CONFIGS_DIR="${INSTALL_DIR}configs/"
-ENV MODELS_DIR="${INSTALL_DIR}models/ldm/stable-diffusion-v1/"
-ENV OUTPUTS_DIR="${INSTALL_DIR}outputs/"
-ENV TRAINING_DIR="${INSTALL_DIR}training-data/"
-
 # Install pre-reqs.
 RUN apt update \
  && apt install -y \
@@ -75,14 +70,49 @@ RUN conda init bash \
  && conda activate invokeai \
  && python3 scripts/preload_models.py --no-interactive
 
+# Make existing data available to volumes.
+ENV ARCHIVE_DIR="${INSTALL_DIR}archive/"
+ENV CONFIGS_DIR="${INSTALL_DIR}configs/"
+ENV LOGS_DIR="${INSTALL_DIR}logs/"
+#ENV MODELS_DIR="${INSTALL_DIR}models/ldm/stable-diffusion-v1/"
+ENV MODELS_DIR="${INSTALL_DIR}models/"
+ENV OUTPUTS_DIR="${INSTALL_DIR}outputs/"
+ENV TRAINING_DIR="${INSTALL_DIR}training-data/"
+
+RUN mkdir -p \
+    ${ARCHIVE_DIR} \
+    ${CONFIGS_DIR} \
+    ${LOGS_DIR}  \
+    ${MODELS_DIR}  \
+    ${OUTPUTS_DIR}  \
+    ${TRAINING_DIR} \
+ && mv ${CONFIGS_DIR} ${ARCHIVE_DIR} \
+ && mv ${LOGS_DIR} ${ARCHIVE_DIR} \
+ && mv ${MODELS_DIR} ${ARCHIVE_DIR} \
+ && mv ${OUTPUTS_DIR} ${ARCHIVE_DIR} \
+ && mv ${TRAINING_DIR} ${ARCHIVE_DIR} \
+ && find ${ARCHIVE_DIR} \
+    -mindepth 1 \
+    -maxdepth 1 \
+    -type d \
+    -exec echo ln -sf {} . \;
+
+# Install rsync for start.sh to copy files from the archive.
+RUN apt update \
+ && apt install -y \
+    rsync \
+    --no-install-recommends \
+ && apt clean \
+ && rm -rf /var/lib/apt/lists/*
+
 # Entry point.
 ADD start.sh .
 RUN dos2unix start.sh \
- && chmod +x start.sh \
- && mkdir -p outputs/ training-data
+ && chmod +x start.sh
 
-# Ports and Volumes.
+# Ports.
 EXPOSE 9090
-VOLUME ["${CONFIGS_DIR}", "${MODELS_DIR}", "${OUTPUTS_DIR}", "${TRAINING_DIR}"]
+
+# Volumes no longer defined here since they can be used anyway.
 
 ENTRYPOINT ${INSTALL_DIR}/start.sh
