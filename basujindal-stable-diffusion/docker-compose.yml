@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  app:
+    image: wpafbo79/basujindal-stable-diffusion:latest
+    restart: unless-stopped
+    volumes:
+      - configs:/stable-diffusion/configs/
+      - logs:/stable-diffusion/logs/
+      - models:/stable-diffusion/models/ldm/stable-diffusion-v1/
+      - outputs:/stable-diffusion/outputs/
+      - training:/stable-diffusion/training-data/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+volumes:
+  configs:
+    driver: local
+  logs:
+    driver: local
+  models:
+    driver: local
+  outputs:
+    driver: local
+  training:
+    driver: local
