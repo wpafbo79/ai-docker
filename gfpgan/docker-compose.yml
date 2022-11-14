@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  app:
+    image: wpafbo79/gfpgan:latest
+    restart: unless-stopped
+    volumes:
+      - inputs:/GFPGAN/inputs/
+      - models:/GFPGAN/experiments/pretrained_models/
+      - results:/GFPGAN/results/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+volumes:
+  inputs:
+    driver: local
+  models:
+    driver: local
+  results:
+    driver: local
