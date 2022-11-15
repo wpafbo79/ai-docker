@@ -31,8 +31,10 @@ WORKDIR $BASE_DIR
 RUN git clone --depth=1 https://github.com/invoke-ai/InvokeAI.git
 
 # Configure conda.
+ENV CONDA_YAML="environments-and-requirements/environment-lin-cuda.yml"
 WORKDIR $INSTALL_DIR
-RUN conda env create \
+RUN ln -s ${CONDA_YAML} environment.yml \
+ && conda env create \
  && conda init bash \
  && conda clean --all --yes
 
