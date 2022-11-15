@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  app:
+    image: wpafbo79/real-esrgan:latest
+    restart: unless-stopped
+    volumes:
+      - inputs:/Real-ESRGAN/inputs/
+      - models:/Real-ESRGAN/experiments/pretrained_models/
+      - results:/Real-ESRGAN/results/
+      - weights:/Real-ESRGAN/weights/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+volumes:
+  inputs:
+    driver: local
+  models:
+    driver: local
+  results:
+    driver: local
+  weights:
+    driver: local
