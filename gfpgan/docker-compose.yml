@@ -5,8 +5,8 @@ services:
     image: wpafbo79/gfpgan:latest
     restart: unless-stopped
     volumes:
+      - experiments:/GFPGAN/experiments/
       - inputs:/GFPGAN/inputs/
-      - models:/GFPGAN/experiments/pretrained_models/
       - results:/GFPGAN/results/
     deploy:
       resources:
@@ -15,9 +15,9 @@ services:
             - capabilities: [gpu]
 
 volumes:
-  inputs:
+  experiments:
     driver: local
-  models:
+  inputs:
     driver: local
   results:
     driver: local
