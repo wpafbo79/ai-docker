@@ -5,8 +5,8 @@ services:
     image: wpafbo79/real-esrgan:latest
     restart: unless-stopped
     volumes:
+      - experiments:/Real-ESRGAN/experiments/
       - inputs:/Real-ESRGAN/inputs/
-      - models:/Real-ESRGAN/experiments/pretrained_models/
       - results:/Real-ESRGAN/results/
       - weights:/Real-ESRGAN/weights/
     deploy:
@@ -16,9 +16,9 @@ services:
             - capabilities: [gpu]
 
 volumes:
-  inputs:
+  experiments:
     driver: local
-  models:
+  inputs:
     driver: local
   results:
     driver: local

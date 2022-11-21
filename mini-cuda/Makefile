@@ -1,5 +1,5 @@
-all: build
+all: image
 
-.PHONY: build
-build:
+.PHONY: image
+image:
 	./build.sh

@@ -7,9 +7,9 @@ services:
     volumes:
       - configs:/stable-diffusion/configs/
       - logs:/stable-diffusion/logs/
-      - models:/stable-diffusion/models/ldm/stable-diffusion-v1/
+      - models:/stable-diffusion/models/
       - outputs:/stable-diffusion/outputs/
-      - training:/stable-diffusion/training-data/
+      - training-data:/stable-diffusion/training-data/
     deploy:
       resources:
         reservations:
@@ -25,5 +25,5 @@ volumes:
     driver: local
   outputs:
     driver: local
-  training:
+  training-data:
     driver: local

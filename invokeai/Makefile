@@ -1,5 +1,9 @@
-all: build
+all: compose image
 
-.PHONY: build
-build:
+.PHONY: compose
+compose:
+	./create-compose-file.sh > docker-compose.yml
+
+.PHONY: image
+image:
 	./build.sh
