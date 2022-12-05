@@ -1,6 +1,6 @@
 #!/bin/bash --login
 
-progname=$(basename $0)
+progname=$(basename ${0})
 
 usage="
 Usage: ${progname} [-g|-h|-p|-u]
@@ -12,7 +12,7 @@ Usage: ${progname} [-g|-h|-p|-u]
 optGitLog=0
 optUpdate=0
 
-usage() { echo "$usage" 1>&2; exit 1; }
+usage() { echo "${usage}" 1>&2; exit 1; }
 
 while getopts ":ghpu" options; do
   case "${options}" in
@@ -32,14 +32,14 @@ while getopts ":ghpu" options; do
 done
 shift $((OPTIND-1))
 
-if [ $optGitLog -eq 1 ]; then
+if [ ${optGitLog} -eq 1 ]; then
   echo -e "Most recent local Git commit for Real-ESRGAN:\n"
   git log --max-count=1
 
   exit
 fi
 
-if [ $optUpdate -eq 1 ]; then
+if [ ${optUpdate} -eq 1 ]; then
   echo "Updating to most recent version of Real-ESRGAN..."
 
   # Fix issue with files already existing
@@ -50,7 +50,7 @@ fi
 
 # Copy data from directories covered by volumes to populate volumes.
 for dir in $(ls -d archive/*); do
-  rsync -HaAxX --ignore-existing $dir/ $(basename $dir)/
+  rsync -HaAxX --ignore-existing ${dir}/ $(basename ${dir})/
 done
 
 if [ $(ls experiments/pretrained_models/*.pth | wc -l) -eq 0 ]; then
