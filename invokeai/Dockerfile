@@ -38,37 +38,17 @@ RUN ln -s ${CONDA_YAML} environment.yml \
  && conda init bash \
  && conda clean --all --yes
 
-# Do initial setup (licensed models not are downloaded).
+# Do initial setup (licensed models are not downloaded).
 RUN conda init bash \
  && conda activate invokeai \
  && python3 scripts/preload_models.py --no-interactive
 
 # Make existing data available to volumes.
-ENV ARCHIVE_DIR="${INSTALL_DIR}archive/"
-ENV CONFIGS_DIR="${INSTALL_DIR}configs/"
-ENV LOGS_DIR="${INSTALL_DIR}logs/"
-#ENV MODELS_DIR="${INSTALL_DIR}models/ldm/stable-diffusion-v1/"
-ENV MODELS_DIR="${INSTALL_DIR}models/"
-ENV OUTPUTS_DIR="${INSTALL_DIR}outputs/"
-ENV TRAINING_DIR="${INSTALL_DIR}training-data/"
-
-RUN mkdir -p \
-    ${ARCHIVE_DIR} \
-    ${CONFIGS_DIR} \
-    ${LOGS_DIR}  \
-    ${MODELS_DIR}  \
-    ${OUTPUTS_DIR}  \
-    ${TRAINING_DIR} \
- && mv ${CONFIGS_DIR} ${ARCHIVE_DIR} \
- && mv ${LOGS_DIR} ${ARCHIVE_DIR} \
- && mv ${MODELS_DIR} ${ARCHIVE_DIR} \
- && mv ${OUTPUTS_DIR} ${ARCHIVE_DIR} \
- && mv ${TRAINING_DIR} ${ARCHIVE_DIR} \
- && find ${ARCHIVE_DIR} \
-    -mindepth 1 \
-    -maxdepth 1 \
-    -type d \
-    -exec echo ln -sf {} . \;
+ADD archive.sh .
+ADD config.sh .
+RUN dos2unix archive.sh \
+ && chmod +x archive.sh \
+ && ./archive.sh
 
 # Install rsync for start.sh to copy files from the archive.
 RUN apt update \
