@@ -10,7 +10,7 @@ function create-container() {
 
   optBase=""
   optName=${DEFAULT_NAME}
-  optVersion=${DEFAULT_VERSION}
+  optVersion=${DEFAULT_CREATE_VERSION}
   optVolumesUsed="false"
 
   while getopts $(optionstring ":b:hn:v:") options; do
@@ -19,7 +19,7 @@ function create-container() {
         optBase=${OPTARG}
         ;;
       h)
-        usage "${DEFAULT_NAME}" "${DEFAULT_VERSION}"
+        usage "${DEFAULT_NAME}" "${DEFAULT_CREATE_VERSION}"
         ;;
       n)
         optName=${OPTARG}
@@ -33,7 +33,7 @@ function create-container() {
 
           optVolumesUsed="true"
         else
-          usage "${DEFAULT_NAME}" "${DEFAULT_VERSION}"
+          usage "${DEFAULT_NAME}" "${DEFAULT_CREATE_VERSION}"
 
           exit 1
         fi
@@ -43,7 +43,7 @@ function create-container() {
   shift $((OPTIND-1))
 
   if [ "${optBase}" != "" -a ${optVolumesUsed} = "true" ]; then
-    usage "${DEFAULT_NAME}" "${DEFAULT_VERSION}"
+    usage "${DEFAULT_NAME}" "${DEFAULT_CREATE_VERSION}"
   fi
 
   if [ "${optBase}" != "" ]; then
