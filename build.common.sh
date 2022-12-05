@@ -19,10 +19,6 @@ function build() {
     tr -s " " |
     cut -d " " -f 3)
 
-exit
-echo ${previd}
-echo ${currid}
-docker image ls | grep ${currid}
   # Push the image if it is new
   if [ "${previd}" != "${currid}" ]; then
     echo "Uploading..."
