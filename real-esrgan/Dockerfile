@@ -42,27 +42,11 @@ RUN pip install -r requirements.txt
 RUN python setup.py develop
 
 # Make existing data available to volumes.
-ENV ARCHIVE_DIR="${INSTALL_DIR}archive/"
-ENV INPUTS_DIR="${INSTALL_DIR}inputs/"
-ENV MODELS_DIR="${INSTALL_DIR}experiments/"
-ENV RESULTS_DIR="${INSTALL_DIR}results/"
-ENV WEIGHTS_DIR="${INSTALL_DIR}weights/"
-
-RUN mkdir -p \
-    ${ARCHIVE_DIR} \
-    ${INPUTS_DIR}  \
-    ${MODELS_DIR}  \
-    ${RESULTS_DIR}  \
-    ${WEIGHTS_DIR}  \
- && mv ${INPUTS_DIR} ${ARCHIVE_DIR} \
- && mv ${MODELS_DIR} ${ARCHIVE_DIR} \
- && mv ${RESULTS_DIR} ${ARCHIVE_DIR} \
- && mv ${WEIGHTS_DIR} ${ARCHIVE_DIR} \
- && find ${ARCHIVE_DIR} \
-    -mindepth 1 \
-    -maxdepth 1 \
-    -type d \
-    -exec echo ln -sf {} . \;
+ADD archive.sh .
+ADD config.sh .
+RUN dos2unix archive.sh \
+ && chmod +x archive.sh \
+ && ./archive.sh
 
 # Install rsync for start.sh to copy files from the archive.
 RUN apt update \
