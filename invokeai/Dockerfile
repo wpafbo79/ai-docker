@@ -12,8 +12,8 @@ ENV BASE_DIR="/"
 ENV INSTALL_DIR="${BASE_DIR}InvokeAI/"
 
 # Install pre-reqs.
-RUN apt update \
- && apt install -y \
+RUN apt-get update \
+ && apt-get install -y \
     dos2unix \
     libgl1 \
     libglib2.0-0 \
@@ -21,7 +21,7 @@ RUN apt update \
     libxext6 \
     libxrender1 \
     --no-install-recommends \
- && apt clean \
+ && apt-get clean \
  && rm -rf /var/lib/apt/lists/* \
  && conda update -n base -c defaults conda \
  && conda clean --all --yes
@@ -51,11 +51,11 @@ RUN dos2unix archive.sh \
  && ./archive.sh
 
 # Install rsync for start.sh to copy files from the archive.
-RUN apt update \
- && apt install -y \
+RUN apt-get update \
+ && apt-get install -y \
     rsync \
     --no-install-recommends \
- && apt clean \
+ && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # Entry point.
