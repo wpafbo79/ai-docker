@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM nvidia/cuda:11.8.0-base-ubuntu22.04
+FROM wpafbo79/cuda-with-prereqs:latest
 
 SHELL ["/bin/bash", "--login", "-c"]
 
@@ -10,24 +10,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Key directories
 ENV BASE_DIR="/"
 ENV INSTALL_DIR="${BASE_DIR}GFPGAN/"
-
-# Install pre-reqs.
-RUN apt-get update \
- && apt-get install -y \
-    dos2unix \
-    git \
-    libgl1 \
-    libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    libxrender1 \
-    python-is-python3 \
-    python3 \
-    python3-pip \
-    wget \
-    --no-install-recommends \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
 
 # Download Stable Diffusion git repo.
 WORKDIR $BASE_DIR
