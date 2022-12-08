@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
  
-FROM wpafbo79/mini-cuda:latest
+FROM wpafbo79/mini-cuda-with-prereqs:latest
 
 SHELL ["/bin/bash", "--login", "-c"]
 
@@ -10,21 +10,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Key directories
 ENV BASE_DIR="/"
 ENV INSTALL_DIR="${BASE_DIR}InvokeAI/"
-
-# Install pre-reqs.
-RUN apt-get update \
- && apt-get install -y \
-    dos2unix \
-    libgl1 \
-    libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    libxrender1 \
-    --no-install-recommends \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/* \
- && conda update -n base -c defaults conda \
- && conda clean --all --yes
 
 # Download InvokeAI git repo.
 WORKDIR $BASE_DIR
