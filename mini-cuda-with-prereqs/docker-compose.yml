@@ -4,11 +4,8 @@ services:
   app:
     image: wpafbo79/mini-cuda-with-prereqs:latest
     restart: unless-stopped
-    volumes:
     deploy:
       resources:
         reservations:
           devices:
             - capabilities: [gpu]
-
-volumes:
