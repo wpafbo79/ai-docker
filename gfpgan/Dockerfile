@@ -12,8 +12,8 @@ ENV BASE_DIR="/"
 ENV INSTALL_DIR="${BASE_DIR}GFPGAN/"
 
 # Install pre-reqs.
-RUN apt update \
- && apt install -y \
+RUN apt-get update \
+ && apt-get install -y \
     dos2unix \
     git \
     libgl1 \
@@ -26,7 +26,7 @@ RUN apt update \
     python3-pip \
     wget \
     --no-install-recommends \
- && apt clean \
+ && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # Download Stable Diffusion git repo.
@@ -54,11 +54,11 @@ RUN dos2unix archive.sh \
  && ./archive.sh
 
 # Install rsync for start.sh to copy files from the archive.
-RUN apt update \
- && apt install -y \
+RUN apt-get update \
+ && apt-get install -y \
     rsync \
     --no-install-recommends \
- && apt clean \
+ && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # Entry point.
