@@ -15,12 +15,16 @@ services:
   app:
     image: ${REPO}:${DEFAULT_CREATE_VERSION}
     restart: unless-stopped
+EOF
+  if [ -v VOLUMES[@] ]; then
+    cat << EOF
     volumes:
 EOF
 
-  for opt in ${!VOLUMES[@]}; do
-    echo "      - ${VOLUMES[${opt}]}"
-  done
+    for opt in ${!VOLUMES[@]}; do
+      echo "      - ${VOLUMES[${opt}]}"
+    done
+  fi
 
   cat << EOF
     deploy:
@@ -28,13 +32,18 @@ EOF
         reservations:
           devices:
             - capabilities: [gpu]
+EOF
+
+  if [ -v VOLUMES[@] ]; then
+    cat << EOF
 
 volumes:
 EOF
 
-  for opt in ${!VOLUMES[@]}; do
-    volume=$(echo ${VOLUMES[${opt}]} | cut -d ":" -f 1)
-    echo "  ${volume}:"
-    echo "    driver: local"
-  done
+    for opt in ${!VOLUMES[@]}; do
+      volume=$(echo ${VOLUMES[${opt}]} | cut -d ":" -f 1)
+      echo "  ${volume}:"
+      echo "    driver: local"
+    done
+  fi
 }

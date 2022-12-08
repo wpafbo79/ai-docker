@@ -2,13 +2,10 @@ version: "3"
 
 services:
   app:
-    image: wpafbo79/mini-cuda:latest
+    image: wpafbo79/mini-cuda-base:latest
     restart: unless-stopped
-    volumes:
     deploy:
       resources:
         reservations:
           devices:
             - capabilities: [gpu]
-
-volumes:
