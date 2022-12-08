@@ -1,4 +1,5 @@
 BASE_PROJECTS := \
+	cuda-with-prereqs \
 	mini-cuda-base \
 	mini-cuda-with-prereqs
 
