@@ -1,5 +1,5 @@
 BASE_PROJECTS := \
-	mini-cuda
+	mini-cuda-base
 
 ESRGAN_PROJECTS := \
 	real-esrgan
