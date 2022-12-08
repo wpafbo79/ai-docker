@@ -74,3 +74,14 @@ mini-cuda-image:
 .PHONY: real-esrgan-image
 real-esrgan-image:
 	${MAKE} -C real-esrgan/ image
+
+.PHONY: script-permissions
+script-permissions:
+	find . -name "*.sh" -exec git update-index --chmod=-x {} \;
+	find . \( \
+	  -name "build.sh" \
+	  -o \
+	  -name "create-compose-file.sh" \
+          -o \
+	  -name "create-container.sh" \
+	  \) -exec git update-index --chmod=+x {} \;
