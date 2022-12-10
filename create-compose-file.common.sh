@@ -13,7 +13,7 @@ version: "3"
 
 services:
   app:
-    image: ${REPO}:${DEFAULT_CREATE_VERSION}
+    image: ${DOCKER_REPO}:${DEFAULT_CREATE_VERSION}
     restart: unless-stopped
 EOF
   if [ -v VOLUMES[@] ]; then

@@ -74,7 +74,7 @@ function create-container() {
     volumes[${i}]="-v ${volumes[${i}]}"
   done
 
-  docker pull ${REPO}:${optVersion}
+  docker pull ${DOCKER_REPO}:${optVersion}
 
   docker run \
     --gpus all \
@@ -82,7 +82,7 @@ function create-container() {
     -d \
     ${portmap} \
     ${volumes[@]} \
-    ${REPO}:${optVersion}
+    ${DOCKER_REPO}:${optVersion}
 }
 
 function optionstring() {

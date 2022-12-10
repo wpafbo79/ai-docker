@@ -1,13 +1,13 @@
-REPO="wpafbo79/basujindal-stable-diffusion"
-
-VERSION="v$(date -u +%Y%m%d-%H%M%S)"
-
 DEFAULT_CREATE_VERSION="latest"
 DEFAULT_NAME="basujindal-stable-diffusion"
 
-PORT_MAP="none"
+DOCKER_REPO="wpafbo79/basujindal-stable-diffusion"
 
 INSTALL_DIR="/stable-diffusion/"
+
+PORT_MAP="none"
+
+VERSION="v$(date -u +%Y%m%d-%H%M%S)"
 
 declare -A VOLUMES
 VOLUMES[c]="configs:${INSTALL_DIR}configs/"
