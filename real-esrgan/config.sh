@@ -3,6 +3,8 @@ DEFAULT_NAME="real-esrgan"
 
 DOCKER_REPO="wpafbo79/real-esrgan"
 
+GIT_REPO="https://github.com/xinntao/Real-ESRGAN.git"
+
 INSTALL_DIR="/Real-ESRGAN/"
 
 PORT_MAP="none"

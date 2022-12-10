@@ -3,6 +3,8 @@ DEFAULT_NAME="gfpgan"
 
 DOCKER_REPO="wpafbo79/gfpgan"
 
+GIT_REPO="https://github.com/TencentARC/GFPGAN.git"
+
 INSTALL_DIR="/GFPGAN/"
 
 PORT_MAP="none"

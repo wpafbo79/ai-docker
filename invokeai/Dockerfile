@@ -11,9 +11,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV BASE_DIR="/"
 ENV INSTALL_DIR="${BASE_DIR}InvokeAI/"
 
+# Build variables.
+ARG GIT_REPO
+
 # Download InvokeAI git repo.
 WORKDIR $BASE_DIR
-RUN git clone --depth=1 https://github.com/invoke-ai/InvokeAI.git
+RUN git clone --depth=1 "${GIT_REPO}"
 
 # Configure conda.
 ENV CONDA_YAML="environments-and-requirements/environment-lin-cuda.yml"
