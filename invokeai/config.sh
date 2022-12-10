@@ -1,13 +1,13 @@
-REPO="wpafbo79/invokeai"
-
-VERSION="v$(date -u +%Y%m%d-%H%M%S)"
-
 DEFAULT_CREATE_VERSION="latest"
 DEFAULT_NAME="invokeai"
 
-PORT_MAP="9090:9090"
+DOCKER_REPO="wpafbo79/invokeai"
 
 INSTALL_DIR="/InvokeAI/"
+
+PORT_MAP="9090:9090"
+
+VERSION="v$(date -u +%Y%m%d-%H%M%S)"
 
 declare -A VOLUMES
 VOLUMES[c]="configs:${INSTALL_DIR}configs/"

@@ -1,13 +1,13 @@
-REPO="wpafbo79/gfpgan"
-
-VERSION="v$(date -u +%Y%m%d-%H%M%S)"
-
 DEFAULT_CREATE_VERSION="latest"
 DEFAULT_NAME="gfpgan"
 
-PORT_MAP="none"
+DOCKER_REPO="wpafbo79/gfpgan"
 
 INSTALL_DIR="/GFPGAN/"
+
+PORT_MAP="none"
+
+VERSION="v$(date -u +%Y%m%d-%H%M%S)"
 
 declare -A VOLUMES
 VOLUMES[i]="inputs:${INSTALL_DIR}inputs/"
