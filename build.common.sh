@@ -5,6 +5,7 @@ function build() {
 
   docker build \
     --no-cache \
+    --build-arg GIT_REPO="${GIT_REPO}" \
     -f Dockerfile \
     -t ${DOCKER_REPO}:${VERSION} \
     -t ${DOCKER_REPO}:latest \

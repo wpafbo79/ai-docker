@@ -3,6 +3,8 @@ DEFAULT_NAME="compviz-stable-diffusion"
 
 DOCKER_REPO="wpafbo79/compvis-stable-diffusion"
 
+GIT_REPO="https://github.com/CompVis/stable-diffusion.git"
+
 INSTALL_DIR="/stable-diffusion/"
 
 PORT_MAP="none"

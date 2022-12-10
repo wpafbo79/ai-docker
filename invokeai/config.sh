@@ -3,6 +3,8 @@ DEFAULT_NAME="invokeai"
 
 DOCKER_REPO="wpafbo79/invokeai"
 
+GIT_REPO="https://github.com/invoke-ai/InvokeAI.git"
+
 INSTALL_DIR="/InvokeAI/"
 
 PORT_MAP="9090:9090"

@@ -11,9 +11,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV BASE_DIR="/"
 ENV INSTALL_DIR="${BASE_DIR}stable-diffusion/"
 
+# Build variables
+ARG GIT_REPO
+
 # Download Stable Diffusion git repo.
 WORKDIR $BASE_DIR
-RUN git clone --depth=1 https://github.com/CompVis/stable-diffusion.git
+RUN git clone --depth=1 "${GIT_REPO}"
 
 # Configure conda.
 WORKDIR $INSTALL_DIR

@@ -3,6 +3,8 @@ DEFAULT_NAME="basujindal-stable-diffusion"
 
 DOCKER_REPO="wpafbo79/basujindal-stable-diffusion"
 
+GIT_REPO="https://github.com/basujindal/stable-diffusion.git"
+
 INSTALL_DIR="/stable-diffusion/"
 
 PORT_MAP="none"
