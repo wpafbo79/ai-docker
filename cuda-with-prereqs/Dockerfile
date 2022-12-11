@@ -24,10 +24,12 @@ RUN apt-get update \
     python-is-python3 \
     python3 \
     python3-pip \
+    python3-venv \
     wget \
     --no-install-recommends \
  && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* \
+ && python -mpip install --upgrade pip
 
 ################################################################################
 # Reference Tini project page:
