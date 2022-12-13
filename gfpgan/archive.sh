@@ -9,12 +9,10 @@ mkdir -p ${archive_dir}
 for opt in ${!VOLUMES[@]}; do
   dir=$(echo ${VOLUMES[${opt}]} | cut -d ":" -f 2)
 
+  basedir=$(dirname ${dir})
+  leaf=$(basename ${dir} /)
+
   mkdir -p ${dir}
   mv ${dir} ${archive_dir}
+  ln -sf ${archive_dir}/${leaf}/ ${basedir}
 done
-
-find ${archive_dir} \
-  -mindepth 1 \
-  -maxdepth 1 \
-  -type d \
-  -exec echo ln -sf {} . \;
