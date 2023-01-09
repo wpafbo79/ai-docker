@@ -12,11 +12,18 @@ ENV BASE_DIR="/"
 ENV INSTALL_DIR="${BASE_DIR}InvokeAI/"
 
 # Build variables.
+ARG GIT_COMMIT
 ARG GIT_REPO
 
 # Download InvokeAI git repo.
-WORKDIR $BASE_DIR
-RUN git clone --depth=1 "${GIT_REPO}"
+WORKDIR ${BASE_DIR}
+#RUN git clone --depth=1 "${GIT_REPO}"
+RUN mkdir -p ${INSTALL_DIR}
+WORKDIR ${INSTALL_DIR}
+RUN git init \
+ && git remote add origin "${GIT_REPO}" \
+ && git fetch --depth 1 origin "${GIT_COMMIT}" \
+ && git checkout FETCH_HEAD
 
 # Configure conda.
 ENV CONDA_YAML="environments-and-requirements/environment-lin-cuda.yml"
