@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
  
-FROM wpafbo79/mini-cuda-with-prereqs:latest
+FROM wpafbo79/cuda-with-prereqs:cuda-12.0.0_tini-0.19.0
 
 SHELL ["/bin/bash", "--login", "-c"]
 
@@ -25,18 +25,17 @@ RUN git init \
  && git fetch --depth 1 origin "${GIT_COMMIT}" \
  && git checkout FETCH_HEAD
 
-# Configure conda.
-ENV CONDA_YAML="environments-and-requirements/environment-lin-cuda.yml"
-WORKDIR $INSTALL_DIR
-RUN ln -s ${CONDA_YAML} environment.yml \
- && conda env create \
- && conda init bash \
- && conda clean --all --yes
+# Configure virtual environment.
+ENV VENV_REQS="environments-and-requirements/requirements-lin-cuda.txt"
+WORKDIR ${INSTALL_DIR}
+RUN python3 -m venv .venv \
+ && source .venv/bin/activate \
+ && ln -s "${VENV_REQS}" requirements.txt \
+ && python3 -m pip install --prefer-binary --no-cache-dir -r requirements.txt
 
 # Do initial setup (licensed models are not downloaded).
-RUN conda init bash \
- && conda activate invokeai \
- && python3 scripts/preload_models.py --no-interactive
+RUN source .venv/bin/activate \
+ && python3 scripts/configure_invokeai.py --root=$(pwd) --no-interactive --yes
 
 # Make existing data available to volumes.
 ADD archive.sh .
