@@ -54,9 +54,7 @@ conda init bash
 conda activate ldm
 
 # Copy data from directories covered by volumes to populate volumes.
-for dir in $(ls -d archive/*); do
-  rsync -HaAxX --ignore-existing ${dir}/ $(basename ${dir})/
-done
+./sync-archive.sh
 
 if [ $(ls models/ldm/stable-diffusion-v1/*.ckpt | wc -l) -eq 0 -o \
   $(ls configs/models.yaml | wc -l) -eq 0 ]; then

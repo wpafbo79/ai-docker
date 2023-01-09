@@ -49,9 +49,7 @@ if [ ${optUpdate} -eq 1 ]; then
 fi
 
 # Copy data from directories covered by volumes to populate volumes.
-for dir in $(ls -d archive/*); do
-  rsync -HaAxX --ignore-existing ${dir}/ $(basename ${dir})/
-done
+./sync-archive.sh
 
 if [ $(ls experiments/pretrained_models/*.pth | wc -l) -eq 0 ]; then
   cat <<EOF

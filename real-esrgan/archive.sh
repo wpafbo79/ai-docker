@@ -2,9 +2,7 @@
 
 source config.sh
 
-archive_dir="${INSTALL_DIR}archive/"
-
-mkdir -p ${archive_dir}
+mkdir -p ${ARCHIVE_DIR}
 
 for opt in ${!VOLUMES[@]}; do
   dir=$(echo ${VOLUMES[${opt}]} | cut -d ":" -f 2)
@@ -13,6 +11,6 @@ for opt in ${!VOLUMES[@]}; do
   leaf=$(basename ${dir} /)
 
   mkdir -p ${dir}
-  mv ${dir} ${archive_dir}
-  ln -sf ${archive_dir}/${leaf}/ ${basedir}
+  mv ${dir} ${ARCHIVE_DIR}
+  ln -sf ${ARCHIVE_DIR}/${leaf}/ ${basedir}
 done

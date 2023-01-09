@@ -7,6 +7,8 @@ GIT_REPO="https://github.com/TencentARC/GFPGAN.git"
 
 INSTALL_DIR="/GFPGAN/"
 
+ARCHIVE_DIR="${INSTALL_DIR}archive/"
+
 PORT_MAP="none"
 
 VERSION="v$(date -u +%Y%m%d-%H%M%S)"

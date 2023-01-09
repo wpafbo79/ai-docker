@@ -7,6 +7,8 @@ GIT_REPO="https://github.com/xinntao/Real-ESRGAN.git"
 
 INSTALL_DIR="/Real-ESRGAN/"
 
+ARCHIVE_DIR="${INSTALL_DIR}archive/"
+
 PORT_MAP="none"
 
 VERSION="v$(date -u +%Y%m%d-%H%M%S)"
