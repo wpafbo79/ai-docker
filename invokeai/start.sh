@@ -50,6 +50,8 @@ if [ ${optGitLog} -eq 1 ]; then
   exit
 fi
 
+source .venv/bin/activate
+
 if [ ${optUpdate} -eq 1 ]; then
   echo "Updating to most recent version of InvokeAI..."
 
@@ -60,16 +62,13 @@ if [ ${optUpdate} -eq 1 ]; then
   git checkout main
   git pull
 
-  conda env update --prune
-  conda clean --all --yes
+  source .venv/bin/activate
+  python3 -m pip install --prefer-binary --no-cache-dir -r requirements.txt
 fi
-
-conda init bash
-conda activate invokeai
 
 if [ ${optPreload} -eq 1 ]; then
   echo "Preloading models..."
-  python3 scripts/preload_models.py
+  python3 scripts/configure_invokeai.py --root=$(pwd)
   
   exit
 fi
@@ -98,4 +97,7 @@ EOF
 fi
 
 echo "Running InvokeAI...  (This can take a few minutes.)"
-python3 scripts/invoke.py --web --host=0.0.0.0
+python3 scripts/invoke.py \
+  --web --host=0.0.0.0 \
+  --no-nsfw_checker \
+  --root_dir="$(pwd)"
