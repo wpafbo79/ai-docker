@@ -7,6 +7,8 @@ GIT_REPO="https://github.com/invoke-ai/InvokeAI.git"
 
 INSTALL_DIR="/InvokeAI/"
 
+ARCHIVE_DIR="${INSTALL_DIR}archive/"
+
 PORT_MAP="9090:9090"
 
 VERSION="v$(date -u +%Y%m%d-%H%M%S)"
