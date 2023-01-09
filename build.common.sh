@@ -7,6 +7,7 @@ function build() {
   docker build \
     --no-cache \
     --progress=plain \
+    --build-arg GIT_COMMIT="${GIT_COMMIT}" \
     --build-arg GIT_REPO="${GIT_REPO}" \
     -f Dockerfile \
     -t ${DOCKER_REPO}:${VERSION} \
