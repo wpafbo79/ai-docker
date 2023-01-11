@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 BASE_PROJECTS := \
 	cuda-with-prereqs \
 	mini-cuda-base \
@@ -46,7 +48,6 @@ all-compose: $(ALL_COMPOSE)
 
 #.PHONY: $(ALL_COMPOSE)
 %-compose: %
-	echo $(ALL_COMPOSE)
 	${MAKE} -C $</ compose
 
 # Docker images
@@ -55,7 +56,6 @@ all-images: $(ALL_IMAGES)
 
 #.PHONY: $(ALL_IMAGES)
 %-images: %
-	echo $(ALL_IMAGES)
 	${MAKE} -C $</ image
 
 # Scripts
