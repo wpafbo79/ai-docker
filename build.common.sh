@@ -21,8 +21,15 @@ function build() {
     cut -d " " -f 3)
 
   # Push the image if it is new
-  if [ "${previd}" != "${currid}" ]; then
+  if [ -f ../.nopublish -o -f .nopublish ]; then
+    echo "\".nopublish\" detected.  Skipping upload to Docker repo."
+  elif [ "${previd}" != "${currid}" ]; then
     echo "Uploading..."
+    cat << EOF
+Bypass publishing to the Docker repo by creating ".nopublish" in the root
+directory of the repo.  If created in a subdirectory, only that image will be
+skipped.
+EOF
     time ( \
       docker push ${DOCKER_REPO}:${VERSION} && \
       docker push ${DOCKER_REPO}:latest \
