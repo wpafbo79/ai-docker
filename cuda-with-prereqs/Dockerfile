@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
-FROM nvidia/cuda:11.8.0-base-ubuntu22.04
-ENV CUDA_VERSION=11.8.0
+FROM nvidia/cuda:12.0.0-base-ubuntu22.04
+ENV CUDA_VERSION=12.0.0
 
 SHELL ["/bin/bash", "--login", "-c"]
 

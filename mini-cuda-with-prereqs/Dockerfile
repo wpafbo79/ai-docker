@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM wpafbo79/mini-cuda-base:cuda-11.8.0_miniconda3-4.5.12_tini-0.19.0
+FROM wpafbo79/mini-cuda-base:cuda-12.0.0_miniconda3-4.5.12_tini-0.19.0
 
 SHELL ["/bin/bash", "--login", "-c"]
 
