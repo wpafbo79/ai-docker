@@ -5,11 +5,13 @@ function build() {
 
   docker build \
     --no-cache \
+    --progress=plain \
     --build-arg GIT_REPO="${GIT_REPO}" \
     -f Dockerfile \
     -t ${DOCKER_REPO}:${VERSION} \
     -t ${DOCKER_REPO}:latest \
-    .
+    . 2>&1 |
+    tee log.${VERSION}
 
   touch .previd
 
