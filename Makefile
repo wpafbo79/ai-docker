@@ -69,3 +69,7 @@ script-permissions:
           -o \
 	  -name "create-container.sh" \
 	  \) -exec git update-index --chmod=+x {} \;
+
+.PHONY: clean
+clean:
+	@find . \( -name .nopublish -o -name .previd \) -exec rm {} \;
