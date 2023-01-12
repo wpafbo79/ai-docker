@@ -72,4 +72,10 @@ script-permissions:
 
 .PHONY: clean
 clean:
-	@find . \( -name .nopublish -o -name .previd \) -exec rm {} \;
+	@find . \( \
+	  -name .nopublish \
+	  -o \
+          -name .previd \
+	  -o \
+	  -name "log.*" \
+          \) -exec rm -v {} \;
