@@ -47,6 +47,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # Entry point.
+ADD sync-archive.sh .
 ADD start.sh .
 RUN dos2unix start.sh \
  && chmod +x start.sh
