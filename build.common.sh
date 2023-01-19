@@ -3,6 +3,7 @@
 function build() {
   echo ${DOCKER_REPO}:${VERSION}
 
+  DOCKER_BUILDKIT=0 \
   docker build \
     --no-cache \
     --progress=plain \
@@ -11,7 +12,7 @@ function build() {
     -t ${DOCKER_REPO}:${VERSION} \
     -t ${DOCKER_REPO}:latest \
     . 2>&1 |
-    tee log.${VERSION}
+  tee log.${VERSION}
 
   touch .previd
 
