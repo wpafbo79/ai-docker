@@ -11,6 +11,5 @@ for opt in ${!VOLUMES[@]}; do
   leaf=$(basename ${dir} /)
 
   mkdir -p ${dir}
-  mv ${dir} ${ARCHIVE_DIR}
-  ln -sf ${ARCHIVE_DIR}/${leaf}/ ${basedir}
+  cp -rl ${dir} ${ARCHIVE_DIR}
 done
