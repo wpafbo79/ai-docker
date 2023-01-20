@@ -75,7 +75,11 @@ clean:
 	@find . \( \
 	  -name .nopublish \
 	  -o \
-          -name .previd \
-	  -o \
 	  -name "log.*" \
+          \) -exec rm -v {} \;
+
+.PHONY: veryclean
+veryclean: clean
+	@find . \( \
+          -name .previd \
           \) -exec rm -v {} \;
