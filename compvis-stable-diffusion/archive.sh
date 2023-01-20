@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e
+set -u
+set -o pipefail
+
 source config.sh
 
 mkdir -p ${ARCHIVE_DIR}

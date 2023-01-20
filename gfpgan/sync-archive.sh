@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e
+set -u
+set -o pipefail
+
 source config.sh
 
 # Copy data from directories covered by volumes to populate volumes.

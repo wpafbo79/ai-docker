@@ -1,5 +1,9 @@
 #!/bin/bash --login
 
+set -e
+set -u
+set -o pipefail
+
 progname=$(basename ${0})
 
 usage="
