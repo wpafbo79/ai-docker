@@ -62,7 +62,7 @@ function create-container() {
     fi
   done
 
-  portmap=$(echo ${PORT_MAP} | xargs); shift # Strip off whitespace
+  portmap=$(echo ${PORT_MAP} | xargs) # Strip off whitespace
 
   if [ "${portmap}" != "none" -a "${portmap}" != "" ]; then
     portmap="-p ${portmap}"
