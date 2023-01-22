@@ -81,6 +81,5 @@ EOF
   exit
 fi
 
-sleep 24h
-#echo "Running Stable Diffusion...  (This can take a few minutes.)"
-#python3 scripts/txt2img.py ${@}
+echo "Running Stable Diffusion...  (This can take a few minutes.)"
+python3 optimizedSD/txt2img_gradio.py
