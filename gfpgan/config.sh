@@ -14,6 +14,7 @@ PORT_MAP="none"
 VERSION="v$(date -u +%Y%m%d-%H%M%S)"
 
 declare -A VOLUMES
+# Don't use: b, h, n, v
 VOLUMES[i]="inputs:${INSTALL_DIR}inputs/"
 VOLUMES[e]="experiments:${INSTALL_DIR}experiments/"
 VOLUMES[r]="results:${INSTALL_DIR}results/"
