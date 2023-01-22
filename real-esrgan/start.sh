@@ -49,6 +49,8 @@ if [ ${optUpdate} -eq 1 ]; then
   # Fix issue with files already existing
   export PIP_EXISTS_ACTION=w
 
+  git fetch origin
+  git checkout master
   git pull
 fi
 
