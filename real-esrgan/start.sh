@@ -4,6 +4,8 @@ set -e
 set -u
 set -o pipefail
 
+source config.sh
+
 progname=$(basename ${0})
 
 usage="
