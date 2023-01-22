@@ -81,6 +81,7 @@ EOF
   exit
 fi
 
+echo "No server to start, sleeping for 24 hours..."
 sleep 24h
 #echo "Running Stable Diffusion...  (This can take a few minutes.)"
 #python3 scripts/txt2img.py ${@}
