@@ -26,16 +26,30 @@ RUN git init \
  && git checkout FETCH_HEAD
 
 # Configure virtual environment.
-ENV VENV_REQS="environments-and-requirements/requirements-lin-cuda.txt"
 WORKDIR ${INSTALL_DIR}
 RUN python3 -m venv .venv \
+    --upgrade-deps \
+    --copies \
  && source .venv/bin/activate \
- && ln -s "${VENV_REQS}" requirements.txt \
- && python3 -m pip install --prefer-binary --no-cache-dir -r requirements.txt
+ && python3 -m pip install --upgrade pip \
+ && pip install --use-pep517 .
+
+# Build patchmatch
+RUN apt-get update \
+ && apt-get install -y \
+    build-essential \
+    python3-opencv \
+    libopencv-dev \
+    --no-install-recommends \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+RUN source .venv/bin/activate \
+ && pip install pypatchmatch \
+ && python3 -c "from patchmatch import patch_match"
 
 # Do initial setup (licensed models are not downloaded).
 RUN source .venv/bin/activate \
- && python3 scripts/configure_invokeai.py --root=$(pwd) --no-interactive --yes
+ && invokeai-configure --root=$(pwd) --skip-sd-weights --yes
 
 # Make existing data available to volumes.
 ADD archive.sh .

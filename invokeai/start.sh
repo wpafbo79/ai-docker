@@ -63,12 +63,14 @@ if [ ${optUpdate} -eq 1 ]; then
   git pull
 
   source .venv/bin/activate
-  python3 -m pip install --prefer-binary --no-cache-dir -r requirements.txt
+  python3 -m pip install --upgrade pip
+  pip install --use-pep517 .
+  deactivate && source .venv/bin/activate
 fi
 
 if [ ${optPreload} -eq 1 ]; then
   echo "Preloading models..."
-  python3 scripts/configure_invokeai.py --root=$(pwd)
+  invokeai-configure --root=$(pwd)
   
   exit
 fi
@@ -76,8 +78,9 @@ fi
 # Copy data from directories covered by volumes to populate volumes.
 ./sync-archive.sh
 
-if [ $(ls models/ldm/stable-diffusion-v1/*.ckpt | wc -l) -eq 0 -o \
-  $(ls configs/models.yaml | wc -l) -eq 0 ]; then
+if [[ $(ls models/diffusers/models--* | wc -l) -eq 0 &&
+      $(ls models/ldm/stable-diffusion-v1/*.ckpt | wc -l) -eq 0 ]] ||
+  [[ $(ls configs/models.yaml | wc -l) -eq 0 ]]; then
   cat <<EOF
 No model found!
 Please run an interactive command to download models.
@@ -97,7 +100,7 @@ EOF
 fi
 
 echo "Running InvokeAI...  (This can take a few minutes.)"
-python3 scripts/invoke.py \
+invokeai \
   --web --host=0.0.0.0 \
   --no-nsfw_checker \
   --root_dir="$(pwd)"
