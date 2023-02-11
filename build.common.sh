@@ -1,6 +1,9 @@
 #/bin/bash
 
 function build() {
+  : ${GIT_COMMIT:=}
+  : ${GIT_REPO:=}
+
   echo ${DOCKER_REPO}:${VERSION}
 
   DOCKER_BUILDKIT=0 \
