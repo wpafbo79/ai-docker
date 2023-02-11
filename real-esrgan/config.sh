@@ -1,4 +1,3 @@
-DEFAULT_CREATE_VERSION="latest"
 DEFAULT_NAME="real-esrgan"
 
 DOCKER_REPO="wpafbo79/real-esrgan"
@@ -12,6 +11,8 @@ ARCHIVE_DIR="${INSTALL_DIR}archive/"
 PORT_MAP="none"
 
 VERSION="v$(date -u +%Y%m%d-%H%M%S)"
+
+CREATE_VERSION="${VERSION}"
 
 declare -A VOLUMES
 # Don't use: b, h, n, v

@@ -1,4 +1,3 @@
-DEFAULT_CREATE_VERSION="latest"
 DEFAULT_NAME="invokeai"
 
 DOCKER_REPO="wpafbo79/${DEFAULT_NAME}"
@@ -13,6 +12,8 @@ ARCHIVE_DIR="${INSTALL_DIR}archive/"
 PORT_MAP="9090:9090"
 
 VERSION="${GIT_COMMIT}"
+
+CREATE_VERSION="${VERSION}"
 
 declare -A VOLUMES
 # Don't use: b, h, n, v

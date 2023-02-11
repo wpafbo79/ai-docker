@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    image: wpafbo79/real-esrgan:latest
+    image: wpafbo79/real-esrgan:v20230211-010050
     restart: unless-stopped
     volumes:
       - experiments:/Real-ESRGAN/experiments/
