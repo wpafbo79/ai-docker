@@ -8,12 +8,14 @@ function create-compose-file() {
   declare -A optVolumes
   declare -a volumes
 
+  : ${CREATE_VERSION:=latest}
+
   cat << EOF
 version: "3"
 
 services:
   app:
-    image: ${DOCKER_REPO}:${DEFAULT_CREATE_VERSION}
+    image: ${DOCKER_REPO}:${CREATE_VERSION}
     restart: unless-stopped
 EOF
   if [ -v VOLUMES[@] ]; then

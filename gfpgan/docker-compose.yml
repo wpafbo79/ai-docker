@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    image: wpafbo79/gfpgan:latest
+    image: wpafbo79/gfpgan:v20230211-005742
     restart: unless-stopped
     volumes:
       - experiments:/GFPGAN/experiments/

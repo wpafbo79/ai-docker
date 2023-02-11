@@ -1,4 +1,3 @@
-DEFAULT_CREATE_VERSION="latest"
 DEFAULT_NAME="basujindal-stable-diffusion"
 
 DOCKER_REPO="wpafbo79/basujindal-stable-diffusion"
@@ -13,6 +12,8 @@ ARCHIVE_DIR="${INSTALL_DIR}archive/"
 PORT_MAP="7860:7860"
 
 VERSION="${GIT_COMMIT:0:7}"
+
+CREATE_VERSION="${VERSION}"
 
 declare -A VOLUMES
 # Don't use: b, h, n, v
