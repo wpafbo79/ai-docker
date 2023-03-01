@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
-FROM wpafbo79/invokeai:v2.3.0
-ENV INVOKEAI_VERSION=v2.3.0
+FROM wpafbo79/invokeai:v2.3.1.post2
+ENV INVOKEAI_VERSION=v2.3.1.post2
 
 SHELL ["/bin/bash", "--login", "-c"]
 

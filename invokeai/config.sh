@@ -2,7 +2,7 @@ DEFAULT_NAME="invokeai"
 
 DOCKER_REPO="wpafbo79/${DEFAULT_NAME}"
 
-GIT_COMMIT="v2.3.0"
+GIT_COMMIT="v2.3.1.post2"
 GIT_REPO="https://github.com/invoke-ai/InvokeAI.git"
 
 INSTALL_DIR="/InvokeAI/"
