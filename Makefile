@@ -18,6 +18,9 @@ STABLE_DIFFUSION_PROJECTS := \
 	invokeai \
 	invokeai-xformers
 
+TRAINER_PROJECTS := \
+	kohya_ss
+
 BASE_COMPOSE := $(addsuffix -compose, $(BASE_PROJECTS))
 BASE_IMAGES := $(addsuffix -images, $(BASE_PROJECTS))
 
@@ -30,16 +33,21 @@ GFPGAN_IMAGES := $(addsuffix -images, $(GFPGAN_PROJECTS))
 STABLE_DIFFUSION_COMPOSE := $(addsuffix -compose, $(STABLE_DIFFUSION_PROJECTS))
 STABLE_DIFFUSION_IMAGES := $(addsuffix -images, $(STABLE_DIFFUSION_PROJECTS))
 
+TRAINER_COMPOSE := $(addsuffix -compose, $(TRAINER_PROJECTS))
+TRAINER_IMAGES := $(addsuffix -images, $(TRAINER_PROJECTS))
+
 ALL_COMPOSE := \
 	$(BASE_COMPOSE) \
 	$(ESRGAN_COMPOSE) \
 	$(GFPGAN_COMPOSE) \
-	$(STABLE_DIFFUSION_COMPOSE)
+	$(STABLE_DIFFUSION_COMPOSE) \
+	$(TRAINER_COMPOSE)
 ALL_IMAGES := \
 	$(BASE_IMAGES) \
 	$(ESRGAN_IMAGES) \
 	$(GFPGAN_IMAGES) \
-	$(STABLE_DIFFUSION_IMAGES)
+	$(STABLE_DIFFUSION_IMAGES) \
+	$(TRAINER_IMAGES)
 
 .PHONY: all
 all: all-images

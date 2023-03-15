@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  app:
+    image: wpafbo79/kohya_ss:v21.2.5
+    restart: unless-stopped
+    volumes:
+      - models-diffusers:/root/.cache/huggingface/diffusers/
+      - embeddings:/kohya_ss/embeddings/
+      - logs:/kohya_ss/logs/
+      - training-data:/kohya_ss/training-data/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+volumes:
+  models-diffusers:
+    driver: local
+  embeddings:
+    driver: local
+  logs:
+    driver: local
+  training-data:
+    driver: local
