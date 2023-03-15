@@ -11,6 +11,7 @@ services:
       - models-codeformer:/InvokeAI/models/codeformer/
       - models-gfpgan:/InvokeAI/models/gfpgan/
       - logs:/InvokeAI/logs/
+      - models-merged:/InvokeAI/models/merged_models/
       - outputs:/InvokeAI/outputs/
       - models-real-esrgan:/InvokeAI/models/realesrgan/
       - models-stable-diffusion:/InvokeAI/models/ldm/stable-diffusion-v1/
@@ -34,6 +35,8 @@ volumes:
   models-gfpgan:
     driver: local
   logs:
+    driver: local
+  models-merged:
     driver: local
   outputs:
     driver: local
