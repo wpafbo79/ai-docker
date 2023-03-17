@@ -38,8 +38,10 @@ directory of the repo.  If created in a subdirectory, only that image will be
 skipped.
 EOF
     time ( \
-      docker push ${DOCKER_REPO}:${VERSION} && \
-      docker push ${DOCKER_REPO}:latest \
+      echo docker push ${DOCKER_REPO}:${VERSION} &&
+      docker push ${DOCKER_REPO}:${VERSION} &&
+      echo docker push ${DOCKER_REPO}:latest &&
+      docker push ${DOCKER_REPO}:latest
     )
   # Delete the image if it is a new version for an existing image (e.g. there is
   # both a "latest" and versioned label)
