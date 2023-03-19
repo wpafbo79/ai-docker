@@ -2,6 +2,7 @@ SHELL := /bin/bash
 
 BASE_PROJECTS := \
 	cuda-with-prereqs \
+	cuda-with-prereqs-and-tensorrt \
 	mini-cuda-base \
 	mini-cuda-with-prereqs
 
