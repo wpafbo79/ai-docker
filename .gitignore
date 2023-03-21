@@ -1,3 +1,5 @@
+.*.md5
 .nopublish
+.prevdigest
 .previd
 log.*

@@ -91,5 +91,9 @@ clean:
 .PHONY: veryclean
 veryclean: clean
 	@find . \( \
+          -name .*.md5 \
+	  -o \
+          -name .prevdigest \
+	  -o \
           -name .previd \
           \) -exec rm -v {} \;
