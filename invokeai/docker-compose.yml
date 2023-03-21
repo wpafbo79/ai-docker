@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     volumes:
       - configs:/InvokeAI/configs/
-      - models-diffusers:/InvokeAI/models/diffusers/
+      - models-diffusers:/InvokeAI/models/hub/
       - embeddings:/InvokeAI/embeddings/
       - models-codeformer:/InvokeAI/models/codeformer/
       - models-gfpgan:/InvokeAI/models/gfpgan/
@@ -16,7 +16,6 @@ services:
       - models-real-esrgan:/InvokeAI/models/realesrgan/
       - models-stable-diffusion:/InvokeAI/models/ldm/stable-diffusion-v1/
       - training-data:/InvokeAI/training-data/
-      - models-hub:/InvokeAI/models/hub/
     deploy:
       resources:
         reservations:
@@ -45,6 +44,4 @@ volumes:
   models-stable-diffusion:
     driver: local
   training-data:
-    driver: local
-  models-hub:
     driver: local
