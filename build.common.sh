@@ -1,22 +1,49 @@
 #/bin/bash
 
+declare do_build=0
+
 function build() {
   : ${GIT_COMMIT:=}
   : ${GIT_REPO:=}
 
   echo ${DOCKER_REPO}:${VERSION}
 
-  DOCKER_BUILDKIT=0 \
-  docker build \
-    --no-cache \
-    --progress=plain \
-    --build-arg GIT_COMMIT="${GIT_COMMIT}" \
-    --build-arg GIT_REPO="${GIT_REPO}" \
-    -f Dockerfile \
-    -t ${DOCKER_REPO}:${VERSION} \
-    -t ${DOCKER_REPO}:latest \
-    . 2>&1 |
-  tee log.${VERSION}
+  check_checksums
+
+  touch .prevdigest
+
+  grep FROM Dockerfile | cut -d " " -f 2
+  docker pull $(grep FROM Dockerfile | cut -d " " -f 2)
+
+  prevdigest=$(cat .prevdigest)
+  currdigest=$(docker image ls --digests |
+    grep -E $(grep FROM Dockerfile |
+      cut -d " " -f 2 |
+      sed -e 's/:/\\s\*/') |
+    awk  '{print $3}')
+
+  if [ "${prevdigest}" != "${currdigest}" ]; then
+    do_build=1
+  fi
+
+  if [ ${do_build} -eq 0 ]; then
+    echo "No changes.  Skipping build."
+
+    docker pull ${DOCKER_REPO}:${VERSION}
+    docker tag ${DOCKER_REPO}:${VERSION} ${DOCKER_REPO}:latest
+  else
+    DOCKER_BUILDKIT=0 \
+    docker build \
+      --no-cache \
+      --progress=plain \
+      --build-arg GIT_COMMIT="${GIT_COMMIT}" \
+      --build-arg GIT_REPO="${GIT_REPO}" \
+      -f Dockerfile \
+      -t ${DOCKER_REPO}:${VERSION} \
+      -t ${DOCKER_REPO}:latest \
+      . 2>&1 |
+    tee log.${VERSION}
+  fi
 
   touch .previd
 
@@ -50,5 +77,37 @@ EOF
     docker image rm ${DOCKER_REPO}:${VERSION}
   fi
 
+  echo ${currdigest} > .prevdigest
   echo ${currid} > .previd
+
+  create_checksums
+}
+
+function check_checksums() {
+  echo "Checking checksums..."
+
+  for file in *; do
+    if [ "${file##*.}" == "md5" -o "${file%%.*}" == "log" -o -d ${file} ]; then
+      continue
+    fi
+
+
+    md5=.${file}.md5
+    touch ${md5}
+
+    $(diff <(cat ${md5}) <(md5sum ${file}) 2>&1 >/dev/null) ||
+      { echo "Detected change: ${file}" && do_build=1; }
+  done
+}
+
+function create_checksums() {
+  for file in *; do
+    if [ "${file##*.}" == "md5" -o "${file%%.*}" == "log" -o -d ${file} ]; then
+      continue
+    fi
+
+    md5=.${file}.md5
+
+    md5sum ${file} > ${md5}
+  done
 }
