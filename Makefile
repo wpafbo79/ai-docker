@@ -14,7 +14,8 @@ GFPGAN_PROJECTS := \
 STABLE_DIFFUSION_PROJECTS := \
 	basujindal-stable-diffusion \
 	compvis-stable-diffusion \
-	invokeai
+	invokeai \
+	invokeai-xformers
 
 BASE_COMPOSE := $(addsuffix -compose, $(BASE_PROJECTS))
 BASE_IMAGES := $(addsuffix -images, $(BASE_PROJECTS))
