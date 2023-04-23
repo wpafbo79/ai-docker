@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    image: wpafbo79/invokeai:v2.3.2.post1
+    image: wpafbo79/invokeai:v2.3.4.post1
     restart: unless-stopped
     volumes:
       - configs:/InvokeAI/configs/
