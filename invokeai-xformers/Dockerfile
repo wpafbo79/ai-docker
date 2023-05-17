@@ -14,7 +14,7 @@ ENV INSTALL_DIR="${BASE_DIR}InvokeAI/"
 
 # Install xFormers
 WORKDIR ${INSTALL_DIR}
-RUN source .venv/bin/activate \
+RUN source /.venv/bin/activate \
  && pip install \
     triton \
     xformers \

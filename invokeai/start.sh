@@ -50,7 +50,7 @@ if [ ${optGitLog} -eq 1 ]; then
   exit
 fi
 
-source .venv/bin/activate
+source /.venv/bin/activate
 
 if [ ${optUpdate} -eq 1 ]; then
   echo "Updating to most recent version of InvokeAI..."
@@ -62,10 +62,10 @@ if [ ${optUpdate} -eq 1 ]; then
   git checkout main
   git pull
 
-  source .venv/bin/activate
+  source /.venv/bin/activate
   python3 -m pip install --upgrade pip
   pip install --use-pep517 .
-  deactivate && source .venv/bin/activate
+  deactivate && source /.venv/bin/activate
 fi
 
 if [ ${optPreload} -eq 1 ]; then
