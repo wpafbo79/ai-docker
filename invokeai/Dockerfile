@@ -27,10 +27,10 @@ RUN git init \
 
 # Configure virtual environment.
 WORKDIR ${INSTALL_DIR}
-RUN python3 -m venv .venv \
+RUN python3 -m venv /.venv \
     --upgrade-deps \
     --copies \
- && source .venv/bin/activate \
+ && source /.venv/bin/activate \
  && python3 -m pip install --upgrade pip \
  && pip install --use-pep517 .
 
@@ -43,12 +43,12 @@ RUN apt-get update \
     --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
-RUN source .venv/bin/activate \
+RUN source /.venv/bin/activate \
  && pip install pypatchmatch \
  && python3 -c "from patchmatch import patch_match"
 
 # Do initial setup (licensed models are not downloaded).
-RUN source .venv/bin/activate \
+RUN source /.venv/bin/activate \
  && invokeai-configure --root=$(pwd) --skip-sd-weights --yes
 
 # Make existing data available to volumes.
