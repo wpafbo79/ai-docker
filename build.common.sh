@@ -32,7 +32,6 @@ function build() {
     docker pull ${DOCKER_REPO}:${VERSION}
     docker tag ${DOCKER_REPO}:${VERSION} ${DOCKER_REPO}:latest
   else
-    DOCKER_BUILDKIT=0 \
     docker build \
       --no-cache \
       --progress=plain \
