@@ -6,7 +6,7 @@ function build() {
   : ${GIT_COMMIT:=}
   : ${GIT_REPO:=}
 
-  echo ${DOCKER_REPO}:${VERSION}
+  echo "Creating image: ${DOCKER_REPO}:${VERSION}"
 
   check_checksums
 
