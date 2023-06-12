@@ -3,6 +3,8 @@ SHELL := /bin/bash
 BASE_PROJECTS := \
 	cuda-with-prereqs \
 	cuda-with-prereqs-and-tensorrt \
+	cuda-cudnn-with-prereqs \
+	cuda-cudnn-with-prereqs-and-tensorrt \
 	mini-cuda-base \
 	mini-cuda-with-prereqs
 
